@@ -4,7 +4,7 @@ data "google_compute_image" "webserver_image" {
 }
 
 data "template_file" "user_data" {
-  template = file("files/user_data.sh")
+  template = file("/vagrant/terraform/files/user_data.sh")
 }
 
 resource "google_compute_instance" "webserver_instance" {
@@ -43,6 +43,7 @@ resource "google_compute_firewall" "webserver_firewall" {
 
 output "jenkins-server" {
   value = google_compute_instance.webserver_instance 
+  sensitive = true
 }
 
 output "gcp_image" {
